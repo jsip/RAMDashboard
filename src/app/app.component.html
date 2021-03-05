@@ -1,0 +1,49 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav mode="side" #sidenav opened position="start">
+    <a routerLink="/" routerLinkActive="active">
+      <h1>{{title}}</h1>
+    </a>
+    <mat-list>
+      <mat-list-item>
+        <a routerLink="/research">Research</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/fundamentals" routerLinkActive="active">Fundamentals</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/technicals" routerLinkActive="active">Technicals</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/fillings" routerLinkActive="active">Fillings</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/logging" routerLinkActive="active">Logs</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+        <mat-form-field class="full-width">
+          <mat-label>Search Ticker</mat-label>
+          <input matInput aria-label="Ticker" [matAutocomplete]="auto" [formControl]="tickerCtrl">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSubmit($event)">
+            <mat-option *ngFor="let ticker of filteredTickers | async" [value]="ticker.title">
+                <span>{{ ticker.ticker }}</span> |
+                <small>{{ ticker.title }}</small> #
+                <b>{{ ticker.cik_str }}</b>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      Researching ${{ company }}
+      <span class="toolbar-spacer"></span>
+      Account
+    </mat-toolbar>
+    <main class="main-content">
+    </main>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
