@@ -12,8 +12,8 @@ export class TickerSyncService {
   constructor() { }
 
   changeTicker(ticker: string) {
-    this.tickerSource.next(ticker)
-
+    this.tickerSource.next(ticker);
+    console.log(ticker);
   }
 
 }

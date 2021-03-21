@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/ping', controller.sampleHealthCheck);
 router.get('/tickersQuery', controller.tickersQuery);
 router.post('/tickerFilling', controller.tickerFilling);
+router.post('/fillingInfo', controller.getFillingInfo);
 
 // FetchServerService route
 
