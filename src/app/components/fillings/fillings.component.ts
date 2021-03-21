@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EdgarPreviewService } from 'src/app/services/edgar-preview.service';
 import { EdgarSearchService } from 'src/app/services/edgar-search.service';
 import { TickerSyncService } from 'src/app/services/ticker-sync.service';
 
@@ -14,7 +15,8 @@ export class FillingsComponent implements OnInit {
 
   constructor(
     private tickerSync: TickerSyncService,
-    private edgarSearch: EdgarSearchService
+    private edgarSearch: EdgarSearchService,
+    private edgarPreview: EdgarPreviewService
   ) { }
 
   ngOnInit() {
@@ -23,10 +25,8 @@ export class FillingsComponent implements OnInit {
       if (ticker.length > 0) {
         let _cik: any = ticker.match(/\d+/g);
         let cik: any = _cik[0];
-        this.edgarSearch.fetchFillings(cik).subscribe(data => {
-          this.filterLinks(data);
-        });
-      } 
+        this.edgarSearch.fetchFillings(cik).subscribe(data => this.filterLinks(data));
+      }
     })
   }
 
@@ -34,12 +34,14 @@ export class FillingsComponent implements OnInit {
     Object.values(links).forEach((_link: string[]) => {
       _link.forEach(link => {
         if (link.startsWith('/Archives')) {
-          let _l = `https://www.sec.gov/${link}`
+          let _l = `https://www.sec.gov${link}`;
           this.links = [...this.links, _l];
         }
       })
     })
-    console.log(this.links);
+    this.edgarPreview.getFillingInfo(this.links).subscribe(data => {
+        console.log(data, this.links);
+    })
   }
 
 }
