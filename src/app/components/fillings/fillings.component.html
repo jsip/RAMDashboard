@@ -1,5 +1,30 @@
-<div *ngFor="let link of links">
-    <a href="{{ link }}" target="_blank">
-        {{ link }}
-    </a>
-</div>
+<main>
+  <div>
+    <h1>{{ filingsData.name }}</h1>
+    <h3>{{ filingsData.sicDescription }}</h3>
+    <h3>{{ filingsData.addresses.business.street1 }} {{ filingsData.addresses.business.city }} - {{ filingsData.addresses.business.zipCode }}, {{ filingsData.addresses.business.stateOrCountry }}</h3>
+  </div>
+  <br>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Form</th>
+          <th>Document</th>
+          <th>Filing Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let f of filingsArray'>
+          <td>{{ f['i'][0] }}</td>
+          <td>
+            <a href="{{ f['i'][3] }}" target="_blank">
+              {{ f['i'][1] }}
+            </a>
+          </td>
+          <td>{{ f['i'][2] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>

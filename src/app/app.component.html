@@ -26,17 +26,17 @@
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-        <mat-form-field class="full-width">
-          <mat-label>Search Ticker</mat-label>
-          <input matInput aria-label="Ticker" [matAutocomplete]="auto" [formControl]="tickerCtrl">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSubmit($event)">
-            <mat-option *ngFor="let ticker of filteredTickers | async" [value]="ticker.title">
-                <span>{{ ticker.ticker }}</span> |
-                <small>{{ ticker.title }}</small> #
-                <b>{{ ticker.cik_str }}</b>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Search Ticker</mat-label>
+        <input matInput aria-label="Ticker" [matAutocomplete]="auto" [formControl]="tickerCtrl">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSubmit($event)">
+          <mat-option *ngFor="let ticker of filteredTickers | async" [value]="ticker.title">
+            <span>{{ ticker.ticker }}</span> |
+            <small>{{ ticker.title }}</small> #
+            <b>{{ ticker.cik_str }}</b>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
       &nbsp;&nbsp;&nbsp;&nbsp;
       Researching ${{ company }}
       <span class="toolbar-spacer"></span>
